@@ -256,6 +256,43 @@ let getDomainName = (string) => {
 }
 
 let titleize = (string) => {
+    
+    let array = string.split(" ");
+
+    let result = [];
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].length > 3 || i === 0) {
+
+            let x = array[i].split("");
+            x[0] = array[i][0].toUpperCase();
+            result.push(x.join(''));
+        } else {
+            result.push(array[i]);
+        }
+    }
+
+    result = result.join(' ');
+
+    String.prototype.replaceAt = function (index, replacement) {
+        return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+    }
+
+    if (checkDot(result) === true) {
+
+        finalResult = result;
+        finalResult = finalResult.replaceAt(result.indexOf(".") + 2, result[result.indexOf(".") + 2].toUpperCase());
+        return finalResult;
+
+    }
+
+    function checkDot(string) {
+        const DOT = ".";
+        if (string.includes(DOT)) {
+            return true;
+        }
+    }
+
+    return result;
 
 }
 
@@ -296,7 +333,7 @@ let letterPosition = (array) => {
     function getPositionOfLetters(array) {
         let positionOfLetters = [];
         array.forEach(element => {
-            positionOfLetters.push(element.toLowerCase().charCodeAt(0)- 96);
+            positionOfLetters.push(element.toLowerCase().charCodeAt(0) - 96);
         })
         return positionOfLetters;
     }
