@@ -256,7 +256,7 @@ let getDomainName = (string) => {
 }
 
 let titleize = (string) => {
-    
+
     let array = string.split(" ");
 
     let result = [];
@@ -322,7 +322,22 @@ let factorial = (number) => {
 }
 
 let findAnagrams = (string) => {
-    return string;
+
+    function getAllAnagrams(str) {
+        if (str.length === 1)
+            return str;
+        let anagrams = [];
+        for (var i = 0; i < str.length; i++) {
+            let s = str[0];
+            let _new = getAllAnagrams(str.slice(1, str.length));
+            for (let j = 0; j < _new.length; j++)
+                anagrams.push(s + _new[j]);
+            str = str.slice(1, str.length) + s;
+        }
+        return anagrams;
+    }
+
+    return getAllAnagrams(string);
 }
 
 let convertToCelsius = (number) => {
